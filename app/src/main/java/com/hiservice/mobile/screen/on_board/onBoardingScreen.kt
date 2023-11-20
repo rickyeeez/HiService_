@@ -1,10 +1,13 @@
 package com.hiservice.mobile.screen.on_board
 
+import android.service.autofill.OnClickAction
+import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -60,13 +63,12 @@ import kotlinx.coroutines.launch
 @Composable
 fun OnBoardingScreen() {
     val state = rememberPagerState { 3 }
-    val animationScope = rememberCoroutineScope()
     val pageList = listOf(
         OnBoardingPage.First,
         OnBoardingPage.Second,
         OnBoardingPage.Third
     )
-
+    val coroutineScope = rememberCoroutineScope()
     Column(modifier = Modifier.fillMaxSize()) {
         HorizontalPager(
             modifier = Modifier
@@ -75,34 +77,81 @@ fun OnBoardingScreen() {
         ) { page ->
             Column {
                 if(page != 0){
-                    OnBoardingTop(isBack = true, isSkip = true)
+                    OnBoardingTop(isBack = true, isSkip = true,onClick = {
+                        coroutineScope.launch {
+                            state.animateScrollToPage(page = state.currentPage - 1)
+                        }
+                    }, onSkipClick = {
+                        coroutineScope.launch {
+                            state.animateScrollToPage(page = 2)
+                        }
+                    })
                     OnBoardingField(OnBoardingPage = pageList[page])
                 }else{
-                    OnBoardingTop(isSkip = true)
+                    OnBoardingTop(isSkip = true, onClick = {
+                        coroutineScope.launch {
+                            state.animateScrollToPage(page = state.currentPage - 1)
+                        }
+                    },onSkipClick = {
+                        coroutineScope.launch {
+                            state.animateScrollToPage(page = 2)
+                        }
+                    })
                     OnBoardingField(OnBoardingPage = pageList[page])
                 }
 
             }
         }
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp), // Add padding for spacing
+                .padding(32.dp), // Add padding for spacing
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            DotsIndicator(totalDots = 3, selectedIndex = state.currentPage, dotSize = 10.dp)
-            Box(
-                modifier = Modifier
-                    .height(50.dp)
-                    .padding(4.dp)
-                    .width(75.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(Color(0xFFFFC100)),
-                    ) {
-
+            DotsIndicator(totalDots = 3, selectedIndex = state.currentPage, dotSize = 8.dp)
+            if (state.currentPage != 2){
+                Box(
+                    modifier = Modifier
+                        .height(60.dp)
+                        .padding(4.dp)
+                        .width(75.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color(0xFFFFC100))
+                        .clickable {
+                            coroutineScope.launch {
+                                state.animateScrollToPage(page = state.currentPage + 1)
+                            }
+                        },
+                    Alignment.Center) {
+                    Icon(painter = painterResource(id = R.drawable.next_btn), contentDescription = "Btn Next")
+                }
+            }else{
+                Box(
+                    modifier = Modifier
+                        .height(60.dp)
+                        .padding(4.dp)
+                        .width(150.dp)
+                        .clip(RoundedCornerShape(15.dp))
+                        .background(Color(0xFFFFC100))
+                        .clickable {
+                            coroutineScope.launch {
+                                state.animateScrollToPage(page = state.currentPage + 1)
+                            }
+                        },
+                    Alignment.Center) {
+                    Text(
+                        text = "Get Started",
+                        fontFamily = FontFamily(Font(R.font.poppins_regular)),
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 18.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.clickable {
+                        }
+                    )
+                }
             }
+
         }
     }
 }
@@ -141,22 +190,24 @@ fun DotsIndicator(
                 size = dotSize
             )
             if (index != totalDots - 1) {
-                Spacer(modifier = Modifier.padding(horizontal = 2.dp))
+                Spacer(modifier = Modifier.padding(horizontal = 5.dp))
             }
         }
     }
 }
 @Composable
-fun OnBoardingTop(modifier: Modifier = Modifier, isBack : Boolean = false, isSkip : Boolean = false) {
+fun OnBoardingTop(modifier: Modifier = Modifier,onClick: ()-> Unit, onSkipClick: ()-> Unit = {}, isBack : Boolean = false, isSkip : Boolean = false) {
     Column {
         Spacer(modifier = modifier.width(40.dp))
         Row(modifier = modifier
             .fillMaxWidth()
-            .height(120.dp).padding(all = 40.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically){
+            .height(120.dp)
+            .padding(all = 40.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically){
             if(isBack){
                 Icon(
                     painter = painterResource(R.drawable.back_btn),
-                    contentDescription = stringResource(id = R.string.bus_content_description)
+                    contentDescription = stringResource(id = R.string.bus_content_description),
+                    modifier = modifier.clickable { onClick.invoke() }
                 )
 
             }else{
@@ -169,7 +220,10 @@ fun OnBoardingTop(modifier: Modifier = Modifier, isBack : Boolean = false, isSki
                     fontFamily = FontFamily(Font(R.font.poppins_regular)),
                     fontWeight = FontWeight.Medium,
                     fontSize = 18.sp,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    modifier = modifier.clickable {
+                        onSkipClick.invoke()
+                    }
                 )
             }else{
                 Spacer(modifier = modifier.width(0.dp))
@@ -179,7 +233,9 @@ fun OnBoardingTop(modifier: Modifier = Modifier, isBack : Boolean = false, isSki
 }
 @Composable
 fun OnBoardingField(modifier: Modifier = Modifier,OnBoardingPage : OnBoardingPage){
-            Column(modifier = modifier.fillMaxWidth().fillMaxHeight(0.8f), horizontalAlignment = Alignment.CenterHorizontally) {
+            Column(modifier = modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.8f), horizontalAlignment = Alignment.CenterHorizontally) {
                 Box(modifier = modifier
                     .width(300.dp)
                     .height(250.dp)){
@@ -218,6 +274,5 @@ fun OnBoardingField(modifier: Modifier = Modifier,OnBoardingPage : OnBoardingPag
 fun GreetingPreview() {
     HiServiceTheme {
         OnBoardingScreen()
-
     }
 }
