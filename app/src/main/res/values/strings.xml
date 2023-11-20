@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HiService</string>
+    <string name="onBoardDesc">On Board 1</string>
 </resources>
