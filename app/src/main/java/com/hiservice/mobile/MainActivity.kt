@@ -1,25 +1,36 @@
 package com.hiservice.mobile
 
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.hiservice.mobile.screen.on_board.DotsIndicator
+import com.hiservice.mobile.screen.on_board.OnBoardingField
+import com.hiservice.mobile.screen.on_board.OnBoardingTop
+import com.hiservice.mobile.screen.on_board.OnBoardingScreen
 import com.hiservice.mobile.ui.theme.HiServiceTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT < 16) {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        }
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+        actionBar?.hide()
+
         setContent {
             HiServiceTheme {
                 // A surface container using the 'background' color from the theme
@@ -27,34 +38,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Ricky")
+                    Column {
+                        OnBoardingScreen()
+                    }
+
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-    Column {
-        Text("Hello World", fontFamily = FontFamily.Serif)
-        Text("Hello World", fontFamily = FontFamily.SansSerif)
-    }
-    Image(
-        painter = painterResource(id = R.drawable.on_board_1),
-        contentDescription = stringResource(id = R.string.onBoardDesc)
-    )
-}
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-
     HiServiceTheme {
-        Greeting("Android")
+
     }
 }
