@@ -40,7 +40,7 @@ import com.hiservice.mobile.ui.theme.DarkCyan
 import com.hiservice.mobile.ui.theme.HiServiceTheme
 
 @Composable
-fun TopHeadBar(modifier: Modifier = Modifier,onClick: ()-> Unit, isBack : Boolean = false,text : String) {
+fun TopHeadBar(modifier: Modifier = Modifier,onClick: ()-> Unit = {}, isBack : Boolean = false,text : String) {
     Column {
         Spacer(modifier = modifier.width(40.dp))
         Row(modifier = modifier
