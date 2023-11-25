@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,6 +18,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 import com.hiservice.mobile.R
 import com.hiservice.mobile.ui.theme.DarkCyan
 import com.hiservice.mobile.ui.theme.GreyDark
@@ -26,7 +28,7 @@ import com.hiservice.mobile.ui.theme.HiServiceTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputTextCustom(hint: String){
-    var text by remember { mutableStateOf("") }
+    var text by rememberSaveable  { mutableStateOf("") }
 
     TextField(
         value = text,
@@ -37,7 +39,6 @@ fun InputTextCustom(hint: String){
             .clip(RoundedCornerShape(10.dp))
             .fillMaxWidth(),
         colors = TextFieldDefaults.textFieldColors(
-            textColor = DarkCyan,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             focusedLabelColor = GreyDark,
@@ -51,16 +52,17 @@ fun InputTextCustom(hint: String){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasswordInputText() {
-    var password by remember { mutableStateOf("") }
-    var isError by remember { mutableStateOf(false) }
-    var passwordVisibility by remember { mutableStateOf(false) }
+    var password by rememberSaveable  { mutableStateOf("") }
+    var isError by rememberSaveable  { mutableStateOf(false) }
+    var passwordVisibility by rememberSaveable  { mutableStateOf(false) }
 
     val visibilityIcon: Painter = painterResource(id = if (passwordVisibility) R.drawable.ic_visibility_off else R.drawable.ic_visibility_on)
 
     if (isError) {
         Text(
+            fontSize = 12.sp,
             text = "Password kurang dari 8 karakter",
-            color = Color.Red,
+            color = Color.Red.copy(alpha = 0.5f),
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -88,7 +90,6 @@ fun PasswordInputText() {
             keyboardType = KeyboardType.Password
         ),
         colors = TextFieldDefaults.textFieldColors(
-            textColor = DarkCyan,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             focusedLabelColor = GreyDark,
@@ -96,21 +97,23 @@ fun PasswordInputText() {
             containerColor = GreyLight,
             cursorColor = DarkCyan,
         )
+        ,isError = isError,
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmailInputText() {
-    var text by remember { mutableStateOf("") }
-    var isError by remember { mutableStateOf(false) }
+    var text by rememberSaveable  { mutableStateOf("") }
+    var isError by rememberSaveable  { mutableStateOf(false) }
 
     val emailRegex = Regex("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}")
 
     if (isError) {
         Text(
-            text = "Format EMail salah",
-            color = Color.Red,
+            fontSize = 12.sp,
+            text = "Format e-mail salah.",
+            color = Color.Red.copy(alpha = 0.5f),
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -135,7 +138,6 @@ fun EmailInputText() {
             }
         ),
         colors = TextFieldDefaults.textFieldColors(
-            textColor = DarkCyan,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             focusedLabelColor = GreyDark,

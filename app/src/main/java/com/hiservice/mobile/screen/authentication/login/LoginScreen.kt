@@ -76,7 +76,7 @@ fun LoginContent(
         Spacer(modifier = modifier.height(16.dp))
         PasswordInputText()
 
-        Spacer(modifier = modifier.height(180.dp))
+        Spacer(modifier = modifier.height(100.dp))
 
         Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center){
             Text(
