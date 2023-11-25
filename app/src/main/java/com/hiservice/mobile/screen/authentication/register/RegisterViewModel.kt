@@ -1,7 +1,6 @@
-package com.hiservice.mobile.ui.screen.register
+package com.hiservice.mobile.screen.authentication.register
 
 import androidx.lifecycle.ViewModel
-import com.hiservice.mobile.data.HiServiceRepo
 
-class RegisterViewModel(private val repo: HiServiceRepo) : ViewModel(){
+class RegisterViewModel  : ViewModel(){
 }

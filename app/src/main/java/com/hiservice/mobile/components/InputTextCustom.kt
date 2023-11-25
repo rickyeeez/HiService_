@@ -1,4 +1,4 @@
-package com.hiservice.mobile.ui.components
+package com.hiservice.mobile.components
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.*

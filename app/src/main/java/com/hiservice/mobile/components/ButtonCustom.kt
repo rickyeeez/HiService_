@@ -1,4 +1,4 @@
-package com.hiservice.mobile.ui.components
+package com.hiservice.mobile.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
