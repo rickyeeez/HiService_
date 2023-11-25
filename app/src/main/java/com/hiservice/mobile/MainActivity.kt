@@ -18,6 +18,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.hiservice.mobile.screen.authentication.login.LoginContent
+import com.hiservice.mobile.screen.authentication.register.RegisterContent
 import com.hiservice.mobile.screen.on_board.OnBoardingScreen
 import com.hiservice.mobile.ui.theme.HiServiceTheme
 import com.services.finalsubmissionjetpackcompose.ui.navigation.Screen
@@ -50,13 +52,18 @@ fun HiService(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     ) {
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
         NavHost(
             navController = navController,
-            startDestination = Screen.OnBoard.route
+            startDestination = Screen.Login.route
         ) {
             composable(Screen.OnBoard.route) {
                 OnBoardingScreen()
+            }
+            composable(Screen.Login.route) {
+                LoginContent()
+            }
+            composable(Screen.Register.route) {
+                RegisterContent()
             }
         }
     }
