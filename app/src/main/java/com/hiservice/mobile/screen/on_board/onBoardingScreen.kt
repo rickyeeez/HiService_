@@ -33,9 +33,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -51,9 +49,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import com.google.accompanist.pager.HorizontalPagerIndicator
-import com.google.android.gms.analytics.AnalyticsService
 import com.hiservice.mobile.R
 import com.hiservice.mobile.ui.theme.HiServiceTheme
 import com.hiservice.mobile.util.OnBoardingPage
@@ -61,7 +56,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(modifier: Modifier = Modifier,navToLogin: ()-> Unit) {
     val state = rememberPagerState { 3 }
     val pageList = listOf(
         OnBoardingPage.First,
@@ -155,6 +150,7 @@ fun OnBoardingScreen() {
                         fontSize = 18.sp,
                         textAlign = TextAlign.Center,
                         modifier = Modifier.clickable {
+                            navToLogin()
                         }
                     )
                 }
@@ -281,6 +277,6 @@ fun OnBoardingField(modifier: Modifier = Modifier,OnBoardingPage : OnBoardingPag
 @Composable
 fun GreetingPreview() {
     HiServiceTheme {
-        OnBoardingScreen()
+        OnBoardingScreen(navToLogin = {})
     }
 }

@@ -54,10 +54,12 @@ fun HiService(
     ) {
         NavHost(
             navController = navController,
-            startDestination = Screen.Login.route
+            startDestination = Screen.OnBoard.route
         ) {
             composable(Screen.OnBoard.route) {
-                OnBoardingScreen()
+                OnBoardingScreen(navToLogin = {
+                    navController.navigate("login")
+                })
             }
             composable(Screen.Login.route) {
                 LoginContent()

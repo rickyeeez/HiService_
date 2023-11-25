@@ -22,8 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hiservice.mobile.components.ButtonBig
-import com.hiservice.mobile.components.EmailInputText
-import com.hiservice.mobile.components.PasswordInputText
+import com.hiservice.mobile.ui.components.EmailInputText
+import com.hiservice.mobile.ui.components.InputTextCustom
+import com.hiservice.mobile.ui.components.PasswordInputText
 import com.hiservice.mobile.ui.theme.GreyDark
 import com.hiservice.mobile.ui.theme.HiServiceTheme
 
