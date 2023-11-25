@@ -76,7 +76,7 @@ fun OnBoardingScreen() {
             state = state
         ) { page ->
             Column {
-                if(page != 0){
+                if(page == 1){
                     OnBoardingTop(isBack = true, isSkip = true,onClick = {
                         coroutineScope.launch {
                             state.animateScrollToPage(page = state.currentPage - 1)
@@ -87,7 +87,7 @@ fun OnBoardingScreen() {
                         }
                     })
                     OnBoardingField(OnBoardingPage = pageList[page])
-                }else{
+                }else if(page == 0){
                     OnBoardingTop(isSkip = true, onClick = {
                         coroutineScope.launch {
                             state.animateScrollToPage(page = state.currentPage - 1)
@@ -95,6 +95,14 @@ fun OnBoardingScreen() {
                     },onSkipClick = {
                         coroutineScope.launch {
                             state.animateScrollToPage(page = 2)
+                        }
+                    })
+                    OnBoardingField(OnBoardingPage = pageList[page])
+                }
+                else if(page == 2){
+                    OnBoardingTop(isBack = true, onClick = {
+                        coroutineScope.launch {
+                            state.animateScrollToPage(page = state.currentPage - 1)
                         }
                     })
                     OnBoardingField(OnBoardingPage = pageList[page])
