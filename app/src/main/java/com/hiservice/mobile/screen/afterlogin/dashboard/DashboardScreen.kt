@@ -19,7 +19,6 @@ import com.hiservice.mobile.ui.theme.HiServiceTheme
 
 @Composable
 fun DashboardContent(modifier : Modifier = Modifier){
-
     Column(modifier = modifier.fillMaxSize()) {
         TopHeadBar(text = "Dashboard", onClick = {
 

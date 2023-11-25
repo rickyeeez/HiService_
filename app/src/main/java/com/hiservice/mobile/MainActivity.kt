@@ -18,6 +18,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.hiservice.mobile.screen.afterlogin.dashboard.DashboardContent
 import com.hiservice.mobile.screen.authentication.login.LoginContent
 import com.hiservice.mobile.screen.authentication.register.RegisterContent
 import com.hiservice.mobile.screen.on_board.OnBoardingScreen
@@ -66,6 +67,9 @@ fun HiService(
             }
             composable(Screen.Register.route) {
                 RegisterContent()
+            }
+            composable(Screen.Dashboard.route) {
+                DashboardContent()
             }
         }
     }
