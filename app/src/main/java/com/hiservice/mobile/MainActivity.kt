@@ -32,7 +32,6 @@ class MainActivity : ComponentActivity() {
         }
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         actionBar?.hide()
-
         setContent {
             HiServiceTheme {
                 // A surface container using the 'background' color from the theme

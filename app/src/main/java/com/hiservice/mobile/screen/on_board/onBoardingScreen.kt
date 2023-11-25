@@ -176,7 +176,7 @@ fun DotsIndicator(
     totalDots: Int,
     selectedIndex: Int,
     selectedColor: Color = Color(0xFF263238),
-    unSelectedColor: Color = Color(0xFFDBDBDB) /* Color.Gray */,
+    unSelectedColor: Color = Color(0xFFDBDBDB),
     dotSize: Dp
 ) {
     LazyRow(
