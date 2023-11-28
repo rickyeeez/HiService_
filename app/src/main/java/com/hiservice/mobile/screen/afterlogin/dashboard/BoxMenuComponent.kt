@@ -36,7 +36,7 @@ fun BoxMenuComponent(modifier: Modifier = Modifier, image: Int, text : String){
             .height(145.dp)
             .clip(RoundedCornerShape(15.dp)).clickable {
             },
-        elevation = CardDefaults.cardElevation(defaultElevation =  10.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation =  6.dp),
 
         ) {
             Column(

@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.hiservice.mobile.screen.afterlogin.dashboard.DashboardContent
+import com.hiservice.mobile.screen.afterlogin.services.first_page_detail.FirstPageDetail
 import com.hiservice.mobile.screen.authentication.login.LoginContent
 import com.hiservice.mobile.screen.authentication.register.RegisterContent
 import com.hiservice.mobile.screen.on_board.OnBoardingScreen
@@ -55,7 +56,7 @@ fun HiService(
     ) {
         NavHost(
             navController = navController,
-            startDestination = Screen.OnBoard.route
+            startDestination = Screen.Service_Detail.route
         ) {
             composable(Screen.OnBoard.route) {
                 OnBoardingScreen(navToLogin = {
@@ -70,6 +71,9 @@ fun HiService(
             }
             composable(Screen.Dashboard.route) {
                 DashboardContent()
+            }
+            composable(Screen.Service_Detail.route) {
+                FirstPageDetail()
             }
         }
     }
