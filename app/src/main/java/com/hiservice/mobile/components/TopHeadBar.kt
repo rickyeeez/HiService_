@@ -45,7 +45,7 @@ fun TopHeadBar(modifier: Modifier = Modifier,onClick: ()-> Unit = {}, isBack : B
         Spacer(modifier = modifier.width(40.dp))
         Row(modifier = modifier
             .fillMaxWidth()
-            .height(140.dp)
+            .height(100.dp)
             .padding(all = 20.dp), horizontalArrangement = Arrangement.SpaceAround, verticalAlignment = Alignment.CenterVertically){
             if(isBack){
                 Icon(
