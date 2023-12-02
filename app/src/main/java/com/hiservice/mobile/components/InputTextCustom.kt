@@ -25,33 +25,61 @@ import com.hiservice.mobile.ui.theme.GreyDark
 import com.hiservice.mobile.ui.theme.GreyLight
 import com.hiservice.mobile.ui.theme.HiServiceTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
-fun InputTextCustom(hint: String){
+fun InputTextCustom(hint: String,modifier: Modifier = Modifier){
     var text by rememberSaveable  { mutableStateOf("") }
 
     TextField(
         value = text,
         onValueChange = { newText -> text = newText},
         label = {Text(hint)},
-        modifier = Modifier
+        modifier = modifier
             .height(54.dp)
             .clip(RoundedCornerShape(10.dp))
             .fillMaxWidth(),
-        colors = TextFieldDefaults.textFieldColors(
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = GreyLight,
+            unfocusedContainerColor = GreyLight,
+            disabledContainerColor = GreyLight,
+            cursorColor = DarkCyan,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             focusedLabelColor = GreyDark,
             unfocusedLabelColor = GreyDark,
-            containerColor = GreyLight,
-            cursorColor = DarkCyan,
         )
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
-fun PasswordInputText() {
+fun inputTextLarge(modifier: Modifier = Modifier){
+    var text by rememberSaveable  { mutableStateOf("") }
+
+    TextField(
+        value = text,
+        onValueChange = { newText -> text = newText},
+        label = null, // Set label menjadi null untuk menghilangkannya
+        modifier = modifier
+            .height(54.dp)
+            .clip(RoundedCornerShape(10.dp))
+            .fillMaxWidth(),
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = GreyLight,
+            unfocusedContainerColor = GreyLight,
+            disabledContainerColor = GreyLight,
+            cursorColor = DarkCyan,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedLabelColor = GreyDark,
+            unfocusedLabelColor = GreyDark,
+        )
+    )
+}
+
+
+@Composable
+fun PasswordInputText(modifier: Modifier = Modifier) {
     var password by rememberSaveable  { mutableStateOf("") }
     var isError by rememberSaveable  { mutableStateOf(false) }
     var passwordVisibility by rememberSaveable  { mutableStateOf(false) }
@@ -63,7 +91,7 @@ fun PasswordInputText() {
             fontSize = 12.sp,
             text = "Password kurang dari 8 karakter",
             color = Color.Red.copy(alpha = 0.5f),
-            modifier = Modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth()
         )
     }
     TextField(
@@ -89,21 +117,23 @@ fun PasswordInputText() {
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = KeyboardType.Password
         ),
-        colors = TextFieldDefaults.textFieldColors(
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = GreyLight,
+            unfocusedContainerColor = GreyLight,
+            disabledContainerColor = GreyLight,
+            cursorColor = DarkCyan,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             focusedLabelColor = GreyDark,
             unfocusedLabelColor = GreyDark,
-            containerColor = GreyLight,
-            cursorColor = DarkCyan,
         )
         ,isError = isError,
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
-fun EmailInputText() {
+fun EmailInputText(modifier: Modifier = Modifier) {
     var text by rememberSaveable  { mutableStateOf("") }
     var isError by rememberSaveable  { mutableStateOf(false) }
 
@@ -114,7 +144,7 @@ fun EmailInputText() {
             fontSize = 12.sp,
             text = "Format e-mail salah.",
             color = Color.Red.copy(alpha = 0.5f),
-            modifier = Modifier.fillMaxWidth()
+            modifier = modifier.fillMaxWidth()
         )
     }
     TextField(
@@ -124,7 +154,7 @@ fun EmailInputText() {
             isError = !newText.matches(emailRegex) // Cek validitas email
         },
         label = { Text("Email") },
-        modifier = Modifier
+        modifier = modifier
             .height(54.dp)
             .clip(RoundedCornerShape(10.dp))
             .fillMaxWidth(),
@@ -137,13 +167,15 @@ fun EmailInputText() {
                 isError = !text.matches(emailRegex) // Cek validitas email saat tombol "Done" ditekan
             }
         ),
-        colors = TextFieldDefaults.textFieldColors(
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = GreyLight,
+            unfocusedContainerColor = GreyLight,
+            disabledContainerColor = GreyLight,
+            cursorColor = DarkCyan,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             focusedLabelColor = GreyDark,
             unfocusedLabelColor = GreyDark,
-            containerColor = GreyLight,
-            cursorColor = DarkCyan
         ),
         isError = isError,
         singleLine = true

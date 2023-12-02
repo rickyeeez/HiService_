@@ -26,6 +26,7 @@ import com.hiservice.mobile.screen.on_board.OnBoardingScreen
 import com.hiservice.mobile.ui.theme.HiServiceTheme
 import com.services.finalsubmissionjetpackcompose.ui.navigation.Screen
 
+@Suppress("DEPRECATION")
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
