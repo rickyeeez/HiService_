@@ -1,4 +1,4 @@
-package com.hiservice.mobile.data.fake_data
+package com.hiservice.mobile.data.model
 
 import android.widget.CheckBox
 

@@ -45,8 +45,7 @@ fun DaftarKeluhan(modifier: Modifier = Modifier){
 
             LazyColumn (modifier = modifier
                 .height(600.dp)
-                .border(1.dp, DarkCyan)
-                .clip(RoundedCornerShape(15.dp))
+                .border(1.dp, DarkCyan, RoundedCornerShape(15.dp))
             ){
                 items(KeluhanFakeData.listKeluhan, key = {it.id}){keluhan ->
                     DaftarKeluhanContent(namaKeluhan = keluhan.namaKeluhan,modifier = Modifier.fillMaxWidth())

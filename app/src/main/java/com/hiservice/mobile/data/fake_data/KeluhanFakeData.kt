@@ -1,5 +1,7 @@
 package com.hiservice.mobile.data.fake_data
 
+import com.hiservice.mobile.data.model.Keluhan
+
 object KeluhanFakeData {
 
     val listKeluhan = listOf(
