@@ -1,0 +1,13 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+# service: default
+service: backend
+
+handlers:
+  - url: /.*
+    script: main.app
+
+env_variables:
+  GAE_USE_SOCKETS_HTTPLIB: "true"
+  GOOGLE_CLOUD_PROJECT: coba-identity #ProjectID Google cloud Project

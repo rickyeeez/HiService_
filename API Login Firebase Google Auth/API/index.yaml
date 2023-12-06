@@ -1,0 +1,11 @@
+indexes:
+  - kind: Note
+    ancestor: yes
+    properties:
+      - name: created
+
+  - kind: Note
+    ancestor: yes
+    properties:
+      - name: created
+        direction: desc
